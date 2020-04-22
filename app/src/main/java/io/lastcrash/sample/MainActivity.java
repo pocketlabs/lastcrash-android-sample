@@ -22,6 +22,8 @@ import io.lastcrash.LastCrashListener;
 
 public class MainActivity extends AppCompatActivity implements LastCrashListener {
 
+    private final String LASTCRASH_API_KEY = "<REPLACE WITH YOUR LASTCRASH PROVIDED API KEY>";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements LastCrashListener
             @Override
             public void onProviderInstalled() {
                 LastCrash.setListener(self);
-                LastCrash.configure("hello_world", self, true);
+                LastCrash.configure(LASTCRASH_API_KEY, self);
             }
 
             @Override
