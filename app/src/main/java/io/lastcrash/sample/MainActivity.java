@@ -17,8 +17,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import io.lastcrash.LastCrash;
-import io.lastcrash.LastCrashListener;
+import io.lastcrash.sdk.LastCrashListener;
+import io.lastcrash.sdk.LastCrash;
 
 public class MainActivity extends AppCompatActivity implements LastCrashListener {
 
