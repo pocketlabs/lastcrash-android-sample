@@ -16,7 +16,7 @@ allprojects {
 - Then, add the following to your app build.gradle file, then sync your project:
 
 ```bash
-implementation 'io.lastcrash:lastcrash-android:1.1.13'
+implementation 'io.lastcrash:lastcrash-android:1.1.14'
 implementation("androidx.lifecycle:lifecycle-runtime:2.6.2")
 ```
 

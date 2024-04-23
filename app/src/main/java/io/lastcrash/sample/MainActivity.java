@@ -22,7 +22,7 @@ import io.lastcrash.sdk.LastCrash;
 
 public class MainActivity extends AppCompatActivity implements LastCrashListener {
 
-    private final String LASTCRASH_API_KEY = "<REPLACE WITH YOUR LASTCRASH PROVIDED API KEY>";
+    private final String LASTCRASH_API_KEY = "8c1ebdd74fd64190b41ddd93e8e3ec48";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
