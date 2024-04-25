@@ -17,7 +17,7 @@ allprojects {
 
 ```bash
 implementation 'io.lastcrash:lastcrash-android:1.1.14'
-implementation("androidx.lifecycle:lifecycle-runtime:2.6.2")
+implementation("androidx.lifecycle:lifecycle-runtime:2.7.0")
 ```
 
 ### Initialize SDK:
