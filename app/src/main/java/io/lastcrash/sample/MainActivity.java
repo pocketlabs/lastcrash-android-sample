@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements LastCrashListener
             public void onProviderInstalled() {
                 LastCrash.setListener(self);
                 LastCrash.configure(LASTCRASH_API_KEY, self);
+                LastCrash.applicationInitialized();
             }
 
             @Override
