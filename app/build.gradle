@@ -31,7 +31,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'io.lastcrash:lastcrash-android:1.1.16'
+    implementation 'io.lastcrash:lastcrash-android:1.1.17'
 
     implementation 'com.google.android.gms:play-services-safetynet:17.0.0'
 
