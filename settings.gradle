@@ -1,2 +1,13 @@
+
+pluginManagement {
+    repositories {
+        maven {
+            url "https://mvn.lastcrash.io/releases"
+        }
+        google()
+        jcenter()
+    }
+}
+
 rootProject.name='LastCrash Sample App'
 include ':app'
