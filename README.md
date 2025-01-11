@@ -41,7 +41,7 @@ In the Android manifest for you app ensure the following permissions are granted
 
 ### Optional Listener
 
-Setting the listener is optional.  If you would like to control the logic behind sending crash reports then implement the `LastCrashReportSenderListener` interface and call `setListener`.
+Setting the listener is optional.  If you would like to control the logic behind sending crash reports then implement the `LastCrashReportSenderListener` interface and call `setCrashReportSenderListener`.
 
 The `lastCrashReportSenderHandleCrash` method will be called when crash reports are available to send.  This allows you to implement your own logic or ask the user for permission to send crash reports.
 
@@ -85,7 +85,7 @@ class MainActivity : LastCrashReportSenderListener {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     ...
-    LastCrash.setListener(this);
+    LastCrash.setCrashReportSenderListener(this);
     LastCrash.configure("LASTCRASH_API_KEY", this, true);
   }
   ...
@@ -105,7 +105,7 @@ public class MainActivity implements LastCrashReportSenderListener {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(null);
     ...
-    LastCrash.setListener(this);
+    LastCrash.setCrashReportSenderListener(this);
     LastCrash.configure("LASTCRASH_API_KEY", this, true);
   }
   ...
