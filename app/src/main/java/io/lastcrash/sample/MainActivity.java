@@ -3,24 +3,23 @@ package io.lastcrash.sample;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.security.ProviderInstaller;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import io.lastcrash.sdk.LastCrashListener;
 import io.lastcrash.sdk.LastCrash;
+import io.lastcrash.sdk.LastCrashReportSenderListener;
 
-public class MainActivity extends AppCompatActivity implements LastCrashListener {
+public class MainActivity extends AppCompatActivity implements LastCrashReportSenderListener {
 
     private final String LASTCRASH_API_KEY = "8c1ebdd74fd64190b41ddd93e8e3ec48";
 
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements LastCrashListener
         ProviderInstaller.installIfNeededAsync(this, new ProviderInstaller.ProviderInstallListener() {
             @Override
             public void onProviderInstalled() {
-                LastCrash.setListener(self);
+                LastCrash.setCrashReportSenderListener(self);
                 LastCrash.configure(LASTCRASH_API_KEY, self);
                 LastCrash.applicationInitialized();
             }
@@ -81,17 +80,17 @@ public class MainActivity extends AppCompatActivity implements LastCrashListener
     }
 
     @Override
-    public void lastCrashDidCrash() {
+    public void lastCrashReportSenderHandleCrash() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Do you want to send crash reports?")
                 .setPositiveButton("Send Crash Reports", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        LastCrash.send();
+                        LastCrash.sendCrashes();
                     }
                 })
                 .setNegativeButton("Don't Send", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        LastCrash.clear();
+                        LastCrash.removeCrashes();
                     }
                 });
         // Create the AlertDialog object and return it

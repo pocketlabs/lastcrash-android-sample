@@ -1,5 +1,9 @@
 # LastCrash Android Sample Application
 
+## API Documentation
+
+[LastCrash iOS Latest API Documentation](https://docs.lastcrash.io/android/api/latest/index.html)
+
 ## SDK Setup Instructions
 
 ### Add Dependencies:
@@ -16,7 +20,7 @@ allprojects {
 - Then, add the following to your app build.gradle file, then sync your project:
 
 ```bash
-implementation 'io.lastcrash:lastcrash-android:1.1.20'
+implementation 'io.lastcrash:lastcrash-android:2.0.0'
 implementation("com.squareup.okhttp3:okhttp:4.12.0")
 implementation("androidx.lifecycle:lifecycle-runtime:2.7.0")
 ```
@@ -32,22 +36,26 @@ In the Android manifest for you app ensure the following permissions are granted
 
 ### Initialize SDK:
 
-- In your MainActivity file, add `LastCrashListener`, initialize the SDK, and configure the `lastCrashDidCrash` method.
+- In your MainActivity file, add `LastCrashReportSenderListener`, initialize the SDK, and configure the `lastCrashReportSenderHandleCrash` method.
 - Replace `LASTCRASH_API_KEY` with your LastCrash API key.
 
 ### Optional Listener
 
-Setting the listener is optional.  If you would like to control the logic behind sending crash reports then implement the `LastCrashListener` interface and call `setListener`.
+Setting the listener is optional.  If you would like to control the logic behind sending crash reports then implement the `LastCrashReportSenderListener` interface and call `setListener`.
 
-The `lastCrashDidCrash` method will be called when crash reports are available to send.  This allows you to implement your own logic or ask the user for permission to send crash reports.
+The `lastCrashReportSenderHandleCrash` method will be called when crash reports are available to send.  This allows you to implement your own logic or ask the user for permission to send crash reports.
 
-`LastCrash.send()` must be called to send the crash reports if the delegate is used.
+`LastCrash.sendCrashes()` must be called to send the crash reports if the delegate is used.
 
 ### Freeze support
 
 A call to `LastCrash.applicationInitialized()` must be made after your app is initialized in order to track freeze (application not responding or ANR) errors.  
 
 The reason this call to `LastCrash.applicationInitialized()` is required is to starting Freeze monitoring only after everything in your app is initialized/loaded so false positives can be avoided.
+
+### Masking support
+
+All text that isn't part of the app's localization files will be redacted on device to prevent any user or customer PII from being captured.  Ensure that all user interface elements are utilizing localization strings to get the most value out of the recorded crash videos.
 
 ### Networking support
 
@@ -72,7 +80,7 @@ Look at the application manifest in this repo for reference.
 ### Kotlin
 
 ```kotlin
-class MainActivity : LastCrashListener {
+class MainActivity : LastCrashReportSenderListener {
   ...
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -81,9 +89,9 @@ class MainActivity : LastCrashListener {
     LastCrash.configure("LASTCRASH_API_KEY", this, true);
   }
   ...
-  override fun lastCrashDidCrash() {
+  override fun lastCrashReportSenderHandleCrash() {
     // logic here to handle crash
-    LastCrash.send();
+    LastCrash.sendCrashes();
   }
 }
 ```
@@ -91,7 +99,7 @@ class MainActivity : LastCrashListener {
 ### Java
 
 ```java
-public class MainActivity implements LastCrashListener {
+public class MainActivity implements LastCrashReportSenderListener {
 ...
 @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -102,9 +110,9 @@ public class MainActivity implements LastCrashListener {
   }
   ...
   @Override
-  public void lastCrashDidCrash() {
+  public void lastCrashReportSenderHandleCrash() {
     // logic here to handle crash
-    LastCrash.send();
+    LastCrash.sendCrashes();
   }
 }
 ```
