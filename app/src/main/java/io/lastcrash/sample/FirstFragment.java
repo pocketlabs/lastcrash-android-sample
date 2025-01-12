@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import io.lastcrash.sdk.LastCrash;
+
 public class FirstFragment extends Fragment {
 
     @Override
@@ -30,5 +32,19 @@ public class FirstFragment extends Fragment {
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        LastCrash.addMaskViewId(R.id.textview_mask_1);
+        LastCrash.addMaskViewId(R.id.button_first);
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        LastCrash.removeMaskViewId(R.id.textview_mask_1);
+        LastCrash.removeMaskViewId(R.id.button_first);
     }
 }
